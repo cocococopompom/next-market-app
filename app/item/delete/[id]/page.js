@@ -12,6 +12,7 @@ const DeleteItem = (context) => {
   const [image, setImage] = useState("")
   const [description, setDescription] = useState("")
   const [email, setEmail] = useState("")
+  const [loading, setLoading] =useState(false)
 
   const loginUserEmail = useAuth()
 
@@ -25,6 +26,7 @@ const DeleteItem = (context) => {
         setImage(singleItem.image)
         setDescription(singleItem.description)
         setEmail(singleItem.email)
+        setLoading(true)
     }
     getSingleItem(context.params.id) 
     }, [context])
@@ -49,6 +51,7 @@ const DeleteItem = (context) => {
           alert("アイテム削除失敗")  
       }
   }
+  if(loading){
   if(loginUserEmail === email){
   return (
     <div>
@@ -65,6 +68,9 @@ const DeleteItem = (context) => {
 )
 }else{
   return <h1>権限がありません</h1>
+}
+}else{
+    return <h1>Loading...</h1>
 }
 }
 export default DeleteItem

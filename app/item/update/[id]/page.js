@@ -9,6 +9,7 @@ const UpdateItem = (context) => {
   const [image, setImage] = useState("")
   const [description, setDescription] = useState("")
   const [email, setEmail] = useState("")
+  const [loading, setLoading] =useState(false)
 
   const loginUserEmail = useAuth()
 
@@ -22,6 +23,7 @@ const UpdateItem = (context) => {
         setImage(singleItem.image)
         setDescription(singleItem.description)
         setEmail(singleItem.email)
+        setLoading(true)
     }
     getSingleItem(context.params.id) 
     }, [context])
@@ -50,6 +52,7 @@ const UpdateItem = (context) => {
           alert("アイテム編集失敗")  
       }
   }
+  if(loading){
   if(loginUserEmail === email){
   return (
     <div>
@@ -66,5 +69,8 @@ const UpdateItem = (context) => {
   }else{
     return<h1>権限がありません</h1>
   }
+}else{
+    return <h1>Loading...</h1>
+}
 }
 export default UpdateItem
